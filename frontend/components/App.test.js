@@ -1,57 +1,36 @@
-// Write your tests here
+// frontend/components/App.test.js
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import AppFunctional from "./AppFunctional";
 
-// import { render, screen, fireEvent } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
-// import AppFunctional from "./AppFunctional";
-
-test("sanity", () => {
-  expect(true).toBe(true);
+test("Koordinatlar metni ekranda görünüyor", () => {
+  render(<AppFunctional />);
+  const coordinatesElement = screen.getByText(/Koordinatlar \(\d, \d\)/i);
+  expect(coordinatesElement).toBeInTheDocument();
 });
 
-// test("App function render oldumu", () => {
-//   render(AppFunctional);
-// });
+test("İlerleme metni ekranda görünüyor", () => {
+  render(<AppFunctional />);
+  const stepsElement = screen.getByText(/kere ilerlediniz/i);
+  expect(stepsElement).toBeInTheDocument();
+});
 
-// test("kordinat degeri", () => {
-//   render(AppFunctional);
-//   const kordinatDegeri = screen.getByTestId("data-test-1");
-//   expect(kordinatDegeri).toHaveTextContent(`Koordinatlar (2,2)`);
-// });
+test("SOL butonu ekranda görünüyor", () => {
+  render(<AppFunctional />);
+  const buttonElement = screen.getByText(/SOL/i);
+  expect(buttonElement).toBeInTheDocument();
+});
 
-// test("adim degeri", () => {
-//   render(AppFunctional);
-//   const adimDegeri = screen.getByTestId("data-test-2");
-//   expect(adimDegeri).toHaveTextContent(`0 kere ilerlediniz`);
-// });
+test("YUKARI butonu ekranda görünüyor", () => {
+  render(<AppFunctional />);
+  const buttonElement = screen.getByText(/YUKARI/i);
+  expect(buttonElement).toBeInTheDocument();
+});
 
-// test("mesaj degeri", () => {
-//   render(AppFunctional);
-//   const mesejDegeri = screen.getByTestId("data-test-3");
-//   expect(mesejDegeri).toHaveTextContent(``);
-// });
-
-// test("sol butonuna basilma testi", () => {
-//   render(AppFunctional);
-//   const kordinatDegeri = screen.getByTestId("data-test-1");
-//   const solButton = screen.getByTestId("sol-button-testi");
-//   userEvent.click(solButton);
-
-//   expect(kordinatDegeri).toHaveTextContent(`Koordinatlar (1,2)`);
-// });
-
-// test("sag butonuna basilma testi", () => {
-//   render(AppFunctional);
-//   const kordinatDegeri = screen.getByTestId("data-test-1");
-//   const sagButton = screen.getByTestId("sag-button-testi");
-//   userEvent.click(sagButton);
-
-//   expect(kordinatDegeri).toHaveTextContent(`Koordinatlar (3,2)`);
-// });
-
-// test("Input degistimi", () => {
-//   render(AppFunctional);
-//   const input = screen.getByTestId("input-testi");
-
-//   fireEvent.change(input, { target: { value: "23" } });
-//   expect(input.value).toBe("23");
-// });
+test("Inputa metin girildiğinde value değişiyor", () => {
+  render(<AppFunctional />);
+  const inputElement = screen.getByPlaceholderText(/email girin/i);
+  fireEvent.change(inputElement, { target: { value: "test@example.com" } });
+  expect(inputElement.value).toBe("test@example.com");
+});
