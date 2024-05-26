@@ -14,7 +14,6 @@ export default function AppFunctional(props) {
   const [email, setEmail] = useState(initialEmail);
   const [steps, setSteps] = useState(initialSteps);
   const [index, setIndex] = useState(initialIndex);
-  //const [yon, setYon] = useState("");
 
   function getXY() {
     // Koordinatları izlemek için bir state e sahip olmak gerekli değildir.
@@ -77,7 +76,7 @@ export default function AppFunctional(props) {
         setMessage("Yukarıya gidemezsiniz");
       }
     } else if (yonumuz === "AŞAĞI") {
-      if (index < 6 && index < 9) {
+      if (index < 6) {
         setIndex((prevIndev) => prevIndev + 3);
         setSteps((prevStep) => prevStep + 1);
       } else {
@@ -159,6 +158,7 @@ export default function AppFunctional(props) {
           placeholder="email girin"
           onChange={onChange}
           value={email}
+          data-test="input-testi"
         ></input>
         <input id="submit" type="submit"></input>
       </form>
